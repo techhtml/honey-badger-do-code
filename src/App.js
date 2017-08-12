@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import firebase from './firebase';
+import TodoList from './TodoList';
 
 class App extends Component {
   constructor() {
@@ -68,40 +69,6 @@ class App extends Component {
     this.setState({
       text:''
     })
-  }
-}
-
-class TodoList extends Component {
-  render() {
-    return (
-      <div>
-        {this.props.items.map((item) => {
-          return (
-            <Todo item={item} key={item.id} />
-          )
-        })}
-      </div>
-    )
-  }
-}
-
-class Todo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.props.item;
-    this.handleDelete = this.handleDelete.bind(this);
-  }
-  render() {
-    return (
-      <div className="todo-item" 햐key={this.state.id}>
-        {this.state.text}
-        <button onClick={this.handleDelete}>X</button>
-      </div>
-    )
-  }
-  handleDelete() {
-    const itemRef = firebase.database().ref('items/' + this.state.id);
-    itemRef.remove();
   }
 }
 
